@@ -1,0 +1,13 @@
+{
+  "name": "proyecto6-formulario",
+  "version": "1.0.0",
+  "description": "Formulario de registro con visualización de datos",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

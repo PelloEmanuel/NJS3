@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto 5 — innerHTML Dinámico</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/style/styles.css" />
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row min-vh-100">
+
+      <!-- Panel izquierdo: controles -->
+      <aside class="controls-panel col-12 col-lg-4 col-xl-3 p-3 bg-light overflow-auto" style="max-height: 100vh;">
+        <div class="brand">innerHTML</div>
+        <p class="brand-sub">Inserción dinámica de HTML</p>
+
+        <div class="ctrl-group mb-3">
+          <div class="ctrl-title">📝 Párrafo</div>
+          <input type="text" id="inputParrafo" class="ctrl-input form-control mb-2" placeholder="Texto del párrafo..." />
+          <button id="btnParrafo" class="ctrl-btn btn-p btn btn-primary w-100">Agregar párrafo</button>
+        </div>
+
+        <div class="ctrl-group mb-3">
+          <div class="ctrl-title">🖼️ Imagen</div>
+          <input type="text" id="inputImgUrl" class="ctrl-input form-control mb-2" placeholder="URL de imagen (opcional)" />
+          <input type="text" id="inputImgAlt" class="ctrl-input form-control mb-2" placeholder="Texto alternativo..." />
+          <button id="btnImagen" class="ctrl-btn btn-img btn btn-success w-100">Agregar imagen</button>
+        </div>
+
+        <div class="ctrl-group mb-3">
+          <div class="ctrl-title">📋 Lista</div>
+          <input type="text" id="inputListaTitulo" class="ctrl-input form-control mb-2" placeholder="Título de la lista..." />
+          <textarea id="inputListaItems" class="ctrl-textarea form-control mb-2" placeholder="Ítem 1&#10;Ítem 2&#10;Ítem 3" rows="4"></textarea>
+          <div class="ctrl-radio-group mb-2">
+            <label class="ctrl-radio me-3"><input type="radio" name="tipoLista" value="ul" checked /> Desordenada</label>
+            <label class="ctrl-radio"><input type="radio" name="tipoLista" value="ol" /> Numerada</label>
+          </div>
+          <button id="btnLista" class="ctrl-btn btn-l btn btn-warning w-100">Agregar lista</button>
+        </div>
+
+        <button id="btnLimpiar" class="ctrl-btn btn-clear btn btn-danger w-100 mt-3">🗑️ Limpiar todo</button>
+      </aside>
+
+      <!-- Panel derecho: canvas -->
+      <main class="canvas-panel col-12 col-lg-8 col-xl-9 p-3 d-flex flex-column">
+        <div class="canvas-header d-flex justify-content-between align-items-center mb-3">
+          <span class="canvas-label">Área de renderizado</span>
+          <span id="contador-badge" class="count-badge badge bg-secondary">0 elementos</span>
+        </div>
+        <div id="canvas" class="canvas-body flex-grow-1 border rounded p-3 overflow-auto">
+          <div class="canvas-empty text-center text-muted">
+            <span class="empty-icon d-block fs-3">✦</span>
+            <p>El contenido aparecerá aquí</p>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/modules/main.js"></script>
+</body>
+</html>

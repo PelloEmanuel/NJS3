@@ -1,0 +1,13 @@
+{
+  "name": "proyecto3-hijos",
+  "version": "1.0.0",
+  "description": "Contar hijos de elementos HTML",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "proyecto2-eventos",
+  "version": "1.0.0",
+  "description": "Navegación y eventos con Express",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

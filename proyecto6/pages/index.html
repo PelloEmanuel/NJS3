@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto 6 — Formulario de Registro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/style/styles.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Formulario -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="form-badge">Registro</div>
+        <h1 class="form-title">Crear cuenta</h1>
+        <p class="form-sub">Completá el formulario y los datos se mostrarán al instante.</p>
+      </div>
+
+      <div class="form-body">
+
+        <!-- Nombre -->
+        <div class="field-row">
+          <label class="field-label" for="inputNombre">Nombre completo</label>
+          <input type="text" id="inputNombre" class="field-input" placeholder="Ej: Juan Pérez" />
+        </div>
+
+        <!-- Email -->
+        <div class="field-row">
+          <label class="field-label" for="inputEmail">Correo electrónico</label>
+          <input type="email" id="inputEmail" class="field-input" placeholder="correo@ejemplo.com" />
+        </div>
+
+        <!-- Edad -->
+        <div class="field-row">
+          <label class="field-label" for="inputEdad">Edad</label>
+          <input type="number" id="inputEdad" class="field-input" min="1" max="120" placeholder="Ej: 25" />
+        </div>
+
+        <!-- Género (radio) -->
+        <div class="field-row">
+          <label class="field-label">Género</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="genero" value="Masculino" />
+              <span class="radio-pill">Masculino</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="genero" value="Femenino" />
+              <span class="radio-pill">Femenino</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="genero" value="No binario" />
+              <span class="radio-pill">No binario</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="genero" value="Prefiero no decir" />
+              <span class="radio-pill">Prefiero no decir</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Intereses (checkbox) -->
+        <div class="field-row">
+          <label class="field-label">Intereses</label>
+          <div class="checkbox-group">
+            <label class="check-option">
+              <input type="checkbox" name="intereses" value="Tecnología" />
+              <span class="check-pill">💻 Tecnología</span>
+            </label>
+            <label class="check-option">
+              <input type="checkbox" name="intereses" value="Diseño" />
+              <span class="check-pill">🎨 Diseño</span>
+            </label>
+            <label class="check-option">
+              <input type="checkbox" name="intereses" value="Música" />
+              <span class="check-pill">🎵 Música</span>
+            </label>
+            <label class="check-option">
+              <input type="checkbox" name="intereses" value="Deportes" />
+              <span class="check-pill">⚽ Deportes</span>
+            </label>
+            <label class="check-option">
+              <input type="checkbox" name="intereses" value="Viajes" />
+              <span class="check-pill">✈️ Viajes</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- País (select) -->
+        <div class="field-row">
+          <label class="field-label" for="selectPais">País</label>
+          <select id="selectPais" class="field-input">
+            <option value="">— Seleccioná tu país —</option>
+            <option value="Argentina">🇦🇷 Argentina</option>
+            <option value="México">🇲🇽 México</option>
+            <option value="Colombia">🇨🇴 Colombia</option>
+            <option value="Chile">🇨🇱 Chile</option>
+            <option value="España">🇪🇸 España</option>
+            <option value="Uruguay">🇺🇾 Uruguay</option>
+            <option value="Perú">🇵🇪 Perú</option>
+            <option value="Otro">🌍 Otro</option>
+          </select>
+        </div>
+
+        <button id="btnEnviar" class="btn-submit">Registrarme →</button>
+      </div>
+    </div>
+
+    <!-- Panel de resultado -->
+    <div class="result-card" id="resultCard">
+      <div class="result-header">
+        <span class="result-icon">✓</span>
+        <h2 class="result-title">Datos registrados</h2>
+      </div>
+      <div id="result-body" class="result-body">
+        <div class="result-empty">
+          <p>Completá el formulario y hacé clic en <strong>Registrarme</strong> para ver los datos aquí.</p>
+        </div>
+      </div>
+      <button id="btnNuevo" class="btn-nuevo hidden">Nuevo registro</button>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/modules/main.js"></script>
+</body>
+</html>
