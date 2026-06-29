@@ -1,64 +1,110 @@
-// main.js — eventos y conexión con el DOM
-
+/**
+ * Módulo principal - conecta eventos con funciones DOM.
+ * Gestiona interacciones del usuario.
+ */
 import {
-  crearH1,
+  mostrarMensaje,
+  obtenerOCrearH1,
   cambiarTextoH1,
   cambiarColorH1,
   agregarImagen,
   cambiarImagen,
-  cambiarTamanoImagen
-} from './dom.js';
+  cambiarTamanoImagen,
+  aplicarTema,
+} from "./dom.js";
 
-const resultado = document.getElementById('resultado');
-const colorPicker = document.getElementById('colorPicker');
-const sliderTamano = document.getElementById('sliderTamano');
-const labelTamano = document.getElementById('labelTamano');
+/* URLs de imágenes de ejemplo */
+const IMAGEN_INICIAL = "https://picsum.photos/seed/dom1/400/250";
+const IMAGEN_ALTERNATIVA = "https://picsum.photos/seed/dom2/400/250";
 
-const IMAGENES = [
-  'https://picsum.photos/seed/dom1/300/300',
-  'https://picsum.photos/seed/dom2/300/300',
-  'https://picsum.photos/seed/dom3/300/300'
-];
-let imgIndex = 0;
-let tamano = 150;
-let textoAlternado = false; // false = "Hola DOM", true = "Chau DOM"
+let modoOscuro = false;
+let imagenActual = IMAGEN_INICIAL;
 
-document.getElementById('btnCrear').addEventListener('click', () => {
-  crearH1('Hola DOM', resultado);
-  textoAlternado = false; // al crear de nuevo, resetea el estado
-  document.getElementById('btnCambiarTexto').textContent = 'Cambiar a "Chau DOM"';
+/* === EVENTO: Agregar H1 (click) === */
+document.getElementById("btnAgregarH1").addEventListener("click", () => {
+  obtenerOCrearH1();
+  mostrarMensaje("H1 'Hola DOM' agregado correctamente.", "success");
 });
 
-document.getElementById('btnCambiarTexto').addEventListener('click', () => {
-  const h1 = resultado.querySelector('h1');
-  if (!h1) return; // si no existe el h1, no hace nada
+/* === EVENTO: Cambiar texto H1 (click) === */
+document.getElementById("btnCambiarTexto").addEventListener("click", () => {
+  cambiarTextoH1("Chau DOM");
+  mostrarMensaje("Texto del H1 cambiado a 'Chau DOM'.", "info");
+});
 
-  if (textoAlternado) {
-    cambiarTextoH1(resultado, 'Hola DOM');
-    document.getElementById('btnCambiarTexto').textContent = 'Cambiar a "Chau DOM"';
+/* === EVENTO: Cambiar color H1 (input en tiempo real) === */
+document.getElementById("inputColor").addEventListener("input", (evento) => {
+  const color = evento.target.value;
+  cambiarColorH1(color);
+  mostrarMensaje(`Color del H1 cambiado a ${color}.`, "info");
+});
+
+/* === EVENTO: Cambiar color H1 por botón (click) === */
+document.getElementById("btnCambiarColor").addEventListener("click", () => {
+  const color = document.getElementById("inputColor").value;
+  cambiarColorH1(color);
+  mostrarMensaje(`Color aplicado: ${color}`, "success");
+});
+
+/* === EVENTO: Agregar imagen (click) === */
+document.getElementById("btnAgregarImagen").addEventListener("click", () => {
+  agregarImagen(imagenActual, 300);
+  mostrarMensaje("Imagen agregada a la zona de contenido.", "success");
+});
+
+/* === EVENTO: Cambiar imagen (click) === */
+document.getElementById("btnCambiarImagen").addEventListener("click", () => {
+  /* Alterna entre las dos URLs de ejemplo */
+  imagenActual =
+    imagenActual === IMAGEN_INICIAL ? IMAGEN_ALTERNATIVA : IMAGEN_INICIAL;
+
+  const resultado = cambiarImagen(imagenActual);
+
+  if (resultado) {
+    mostrarMensaje("Imagen cambiada correctamente.", "success");
   } else {
-    cambiarTextoH1(resultado, 'Chau DOM');
-    document.getElementById('btnCambiarTexto').textContent = 'Volver a "Hola DOM"';
+    mostrarMensaje("Primero debes agregar una imagen.", "warning");
+  }
+});
+
+/* === EVENTO: Cambiar tamaño (keydown + click) === */
+document.getElementById("inputTamano").addEventListener("keydown", (evento) => {
+  /* Permite aplicar con Enter además del botón */
+  if (evento.key === "Enter") {
+    aplicarCambioTamano();
+  }
+});
+
+document.getElementById("btnCambiarTamano").addEventListener("click", () => {
+  aplicarCambioTamano();
+});
+
+/**
+ * Lee el valor de tamaño y aplica el cambio a la imagen.
+ * Valida rango mínimo y máximo.
+ */
+function aplicarCambioTamano() {
+  const valor = parseInt(document.getElementById("inputTamano").value, 10);
+
+  if (isNaN(valor) || valor < 50 || valor > 800) {
+    mostrarMensaje("Ingresá un tamaño válido entre 50 y 800 px.", "danger");
+    return;
   }
 
-  textoAlternado = !textoAlternado; // alterna el estado
-});
+  const resultado = cambiarTamanoImagen(valor);
 
-document.getElementById('btnColor').addEventListener('click', () => {
-  cambiarColorH1(resultado, colorPicker.value);
-});
+  if (resultado) {
+    mostrarMensaje(`Tamaño de imagen cambiado a ${valor}px.`, "success");
+  } else {
+    mostrarMensaje("Primero debes agregar una imagen.", "warning");
+  }
+}
 
-document.getElementById('btnAgregarImg').addEventListener('click', () => {
-  agregarImagen(resultado, IMAGENES[0], tamano);
-});
+/* === EVENTO: Modo claro/oscuro (click) === */
+document.getElementById("btnTema").addEventListener("click", () => {
+  modoOscuro = !modoOscuro;
+  aplicarTema(modoOscuro);
 
-document.getElementById('btnCambiarImg').addEventListener('click', () => {
-  imgIndex = (imgIndex + 1) % IMAGENES.length;
-  cambiarImagen(resultado, IMAGENES[imgIndex]);
-});
-
-sliderTamano.addEventListener('input', (e) => {
-  tamano = parseInt(e.target.value);
-  labelTamano.textContent = `${tamano}px`;
-  cambiarTamanoImagen(resultado, tamano);
+  const btn = document.getElementById("btnTema");
+  btn.textContent = modoOscuro ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
 });

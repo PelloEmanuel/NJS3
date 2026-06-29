@@ -1,75 +1,97 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="claro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto 1 — Manipulación DOM</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/style/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyecto 1 - Manipulación DOM</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="../style/estilos.css" />
 </head>
 <body>
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="page-title mb-4 text-center text-md-start">🧩 Proyecto 1 — Manipulación del DOM</h2>
-      </div>
-    </div>
 
-    <div class="row g-4">
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-panel p-3 h-100">
-          <h5 class="section-title">Texto</h5>
-          <div class="d-flex flex-wrap gap-2">
-            <button id="btnCrear" class="btn btn-primary w-100 w-sm-auto">Crear &lt;h1&gt;</button>
-            <button id="btnCambiarTexto" class="btn btn-secondary w-100 w-sm-auto">Cambiar texto</button>
-          </div>
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <span class="navbar-brand fw-bold">Proyecto 1 - DOM</span>
+      <button id="btnTema" class="btn btn-outline-light btn-sm ms-auto">
+        🌙 Modo Oscuro
+      </button>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2 class="mb-4 text-center titulo-seccion">Manipulación del DOM</h2>
+
+    <!-- Zona de botones de control -->
+    <div class="row g-3 mb-4 justify-content-center">
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button id="btnAgregarH1" class="btn btn-primary w-100">
+          ➕ Agregar H1
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button id="btnCambiarTexto" class="btn btn-secondary w-100">
+          ✏️ Cambiar Texto H1
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <label class="visually-hidden" for="inputColor">Color</label>
+        <div class="input-group">
+          <input type="color" id="inputColor" class="form-control form-control-color" value="#0d6efd" title="Elegir color"/>
+          <button id="btnCambiarColor" class="btn btn-info text-white">
+            🎨 Color H1
+          </button>
         </div>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-panel p-3 h-100">
-          <h5 class="section-title">Color</h5>
-          <div class="row g-2 align-items-center">
-            <div class="col-12 col-sm-auto">
-              <input type="color" id="colorPicker" class="form-control form-control-color w-100" value="#e63946" title="Elegir color" />
-            </div>
-            <div class="col-12 col-sm">
-              <button id="btnColor" class="btn btn-outline-danger w-100">Cambiar color</button>
-            </div>
-          </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <button id="btnAgregarImagen" class="btn btn-success w-100">
+          🖼️ Agregar Imagen
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <button id="btnCambiarImagen" class="btn btn-warning w-100">
+          🔄 Cambiar Imagen
+        </button>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="input-group">
+          <input
+            type="number"
+            id="inputTamano"
+            class="form-control"
+            placeholder="px"
+            min="50"
+            max="800"
+          />
+          <button id="btnCambiarTamano" class="btn btn-danger">
+            📐 Tamaño
+          </button>
         </div>
       </div>
 
-      <div class="col-12 col-md-12 col-lg-4">
-        <div class="card-panel p-3 h-100">
-          <h5 class="section-title">Imagen</h5>
-          <div class="d-flex flex-wrap gap-2">
-            <button id="btnAgregarImg" class="btn btn-success w-100 w-sm-auto">Agregar imagen</button>
-            <button id="btnCambiarImg" class="btn btn-warning w-100 w-sm-auto">Cambiar imagen</button>
-          </div>
-          <div class="row mt-3 g-2 align-items-center">
-            <div class="col-12 col-sm-auto">
-              <label class="form-label mb-0">Tamaño (px):</label>
-            </div>
-            <div class="col-12 col-sm">
-              <input type="range" id="sliderTamano" class="form-range w-100" min="50" max="400" value="150" />
-            </div>
-            <div class="col-12 col-sm-auto text-sm-end">
-              <span id="labelTamano" class="badge bg-secondary">150px</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="row mt-4">
-      <div class="col-12">
-        <div id="resultado" class="resultado-box w-100"></div>
-      </div>
+    <!-- Zona de visualización dinámica -->
+    <div id="zonaContenido" class="zona-contenido p-4 rounded border text-center">
+      <p class="texto-guia">El contenido aparecerá aquí...</p>
     </div>
+
+    <!-- Indicador de estado -->
+    <div id="mensajeEstado" class="mt-3 alert d-none" role="alert"></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="/modules/main.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script type="module" src="../modules/main.js"></script>
 </body>
 </html>

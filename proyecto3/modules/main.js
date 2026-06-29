@@ -1,84 +1,62 @@
-// main.js — eventos + contar hijos
+/**
+ * Main proyecto3.
+ * Gestiona conteo de hijos al pulsar el botón.
+ */
+import {
+  mapaElementos,
+  contarHijos,
+  mostrarResultadoConteo,
+  agregarHistorial,
+  aplicarTema,
+} from "./dom.js";
 
-import { mostrarSeccion, mostrarConteoHijos, colorRandom } from './dom.js';
+let modoOscuro = false;
+let contadorHijosAgregados = 0;
 
-// ---- Navegación ----
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => mostrarSeccion(item.dataset.section));
+/* === EVENTO: Modo oscuro (click) === */
+document.getElementById("btnTema")?.addEventListener("click", () => {
+  modoOscuro = !modoOscuro;
+  aplicarTema(modoOscuro);
+  const btn = document.getElementById("btnTema");
+  btn.textContent = modoOscuro ? "☀️ Claro" : "🌙 Oscuro";
 });
 
-// ---- CLICK: agregar + contar ----
-const clickOutput = document.getElementById('click-output');
-let clickCount = 0;
+/* === EVENTO: Contar hijos al pulsar botón (click) === */
+document.getElementById("btnContarHijos")?.addEventListener("click", () => {
+  const selector = document.getElementById("selectorNodo").value;
+  const obtenerElemento = mapaElementos[selector];
 
-document.getElementById('btnClick').addEventListener('click', () => {
-  clickCount++;
-  const p = document.createElement('p');
-  p.style.margin = '2px 0';
-  p.textContent = `→ Elemento #${clickCount} — ${new Date().toLocaleTimeString()}`;
-  clickOutput.prepend(p);
+  if (!obtenerElemento) return;
+
+  const elemento = obtenerElemento();
+  const nombreLegible = document.getElementById("selectorNodo")
+    .options[document.getElementById("selectorNodo").selectedIndex].text;
+
+  const resultado = contarHijos(elemento);
+  mostrarResultadoConteo(nombreLegible, resultado);
+  agregarHistorial(`Inspeccionado: "${nombreLegible}" → ${resultado.total} hijo(s).`);
 });
 
-document.getElementById('btnContarHijos').addEventListener('click', () => {
-  mostrarConteoHijos(document.getElementById('hijos-badge'), clickOutput);
+/* === EVENTO: Agregar hijo dinámico a la lista (click) === */
+document.getElementById("btnAgregarHijo")?.addEventListener("click", () => {
+  const lista = document.getElementById("listaComponentes");
+  contadorHijosAgregados++;
+
+  const col = document.createElement("div");
+  col.className = "col-12 col-md-6 col-lg-4";
+  col.innerHTML = `
+    <div class="card tarjeta-componente text-center p-3 h-100 elemento-nuevo">
+      <div class="fs-3 mb-2">⭐</div>
+      <h6>Componente extra ${contadorHijosAgregados}</h6>
+      <small class="text-muted">Agregado dinámicamente</small>
+    </div>
+  `;
+  lista.appendChild(col);
+
+  agregarHistorial(`Nuevo hijo agregado: "Componente extra ${contadorHijosAgregados}".`);
 });
 
-// ---- MOUSEOVER: hover + contar ----
-document.querySelectorAll('.hover-card').forEach(card => {
-  card.addEventListener('mouseover', () => {
-    card.style.backgroundColor = card.dataset.color;
-    card.style.color = '#fff';
-    card.style.transform = 'scale(1.06)';
-    document.getElementById('hover-msg').textContent = `Mouse sobre: ${card.textContent.trim()}`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.backgroundColor = '';
-    card.style.color = '';
-    card.style.transform = '';
-  });
-});
-
-document.getElementById('btnContarHijosCards').addEventListener('click', () => {
-  mostrarConteoHijos(document.getElementById('hijos-cards-badge'), document.getElementById('cards-container'));
-});
-
-// ---- INPUT: agregar items + contar ----
-const listaItems = document.getElementById('lista-items');
-document.getElementById('inputTexto').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && e.target.value.trim()) {
-    const li = document.createElement('li');
-    li.textContent = e.target.value.trim();
-    listaItems.appendChild(li);
-    e.target.value = '';
-  }
-});
-
-document.getElementById('btnContarHijosLista').addEventListener('click', () => {
-  mostrarConteoHijos(document.getElementById('hijos-lista-badge'), listaItems);
-});
-
-// ---- KEYDOWN: registrar teclas + contar ----
-const keyOutput = document.getElementById('key-output');
-document.getElementById('key-area').addEventListener('keydown', (e) => {
-  const span = document.createElement('span');
-  span.style.display = 'block';
-  span.textContent = `Tecla: ${e.key} | Código: ${e.code}`;
-  keyOutput.prepend(span);
-});
-
-document.getElementById('btnContarHijosKeys').addEventListener('click', () => {
-  mostrarConteoHijos(document.getElementById('hijos-keys-badge'), keyOutput);
-});
-
-// ---- DBLCLICK: agregar cajas + contar ----
-const dblContainer = document.getElementById('dbl-container');
-document.getElementById('dbl-box').addEventListener('dblclick', () => {
-  const box = document.createElement('div');
-  box.style.cssText = `background:${colorRandom()};color:#fff;border-radius:8px;padding:16px 22px;font-weight:600;`;
-  box.textContent = `Caja ${dblContainer.children.length}`;
-  dblContainer.appendChild(box);
-});
-
-document.getElementById('btnContarHijosDbl').addEventListener('click', () => {
-  mostrarConteoHijos(document.getElementById('hijos-dbl-badge'), dblContainer);
+/* === EVENTO: Cambio de selector actualiza info (change) === */
+document.getElementById("selectorNodo")?.addEventListener("change", (e) => {
+  agregarHistorial(`Selector cambiado a: "${e.target.options[e.target.selectedIndex].text}".`);
 });

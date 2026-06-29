@@ -1,9 +1,8 @@
 {
-  "name": "proyecto4-atributos",
+  "name": "proyecto4",
   "version": "1.0.0",
-  "description": "Modificar atributos de enlaces dinámicamente",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },

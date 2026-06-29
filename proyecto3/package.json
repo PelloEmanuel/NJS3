@@ -1,9 +1,8 @@
 {
-  "name": "proyecto3-hijos",
+  "name": "proyecto3",
   "version": "1.0.0",
-  "description": "Contar hijos de elementos HTML",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },

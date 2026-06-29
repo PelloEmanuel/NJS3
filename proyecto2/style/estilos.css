@@ -1,0 +1,124 @@
+[data-tema="claro"] {
+  --fondo-body: #f0f2f5;
+  --fondo-zona: #ffffff;
+  --color-texto: #212529;
+  --borde: #dee2e6;
+}
+
+[data-tema="oscuro"] {
+  --fondo-body: #121212;
+  --fondo-zona: #1e1e1e;
+  --color-texto: #e0e0e0;
+  --borde: #444444;
+}
+
+body {
+  background-color: var(--fondo-body);
+  color: var(--color-texto);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.zona-demo {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border: 1px solid var(--borde);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tarjeta-evento {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.tarjeta-evento:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.icono-evento {
+  font-size: 2.5rem;
+}
+
+.texto-secundario {
+  color: #888;
+}
+
+/* Listas de registro de eventos */
+.lista-eventos {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.lista-eventos .list-group-item {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border-color: var(--borde);
+  font-size: 0.875rem;
+  padding: 6px 12px;
+}
+
+/* Zona de seguimiento del ratón */
+.zona-raton {
+  background-color: #0d6efd22;
+  border: 2px dashed #0d6efd;
+  min-height: 120px;
+  cursor: crosshair;
+}
+
+.zona-over {
+  background-color: var(--fondo-zona);
+  border: 2px solid var(--borde);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.zona-over.activa {
+  background-color: #198754;
+  color: white;
+}
+
+.zona-dblclick {
+  background-color: var(--fondo-zona);
+  border: 2px solid var(--borde);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Campo con foco activo */
+.campo-foco:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13,110,253,0.2);
+}
+
+/* Vista previa de texto */
+.zona-previa {
+  background-color: var(--fondo-zona);
+  border: 1px solid var(--borde);
+  font-size: 0.9rem;
+}
+
+/* Muestra de color seleccionado */
+.muestra-color {
+  height: 40px;
+  border: 1px solid var(--borde);
+  transition: background-color 0.3s;
+}
+
+@media (max-width: 576px) {
+  .lista-eventos {
+    max-height: 180px;
+  }
+}

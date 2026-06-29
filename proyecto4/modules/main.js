@@ -1,68 +1,133 @@
-// main.js — lógica principal proyecto 4
+/**
+ * Main proyecto4.
+ * Orquesta CRUD de nodos <a> con persistencia en el servidor.
+ */
+import {
+  renderizarNodos,
+  registrarCambio,
+  mostrarMensajeCrear,
+  aplicarTema,
+} from "./dom.js";
 
-import { crearTarjetaEnlace, actualizarTarjeta, crearEntradaLog, poblarSelect } from './dom.js';
+let modoOscuro = false;
+let modalEdicion = null;
 
-// Datos iniciales de los enlaces
-const enlaces = [
-  { id: 'link1', nombre: 'Google',    href: 'https://www.google.com' },
-  { id: 'link2', nombre: 'GitHub',    href: 'https://www.github.com' },
-  { id: 'link3', nombre: 'MDN Docs',  href: 'https://developer.mozilla.org' },
-  { id: 'link4', nombre: 'Wikipedia', href: 'https://www.wikipedia.org' },
-  { id: 'link5', nombre: 'YouTube',   href: 'https://www.youtube.com' },
-];
-
-const linksContainer = document.getElementById('links-container');
-const logContainer   = document.getElementById('log-container');
-const selectEnlace   = document.getElementById('selectEnlace');
-const inputHref      = document.getElementById('inputHref');
-
-// Renderizar tarjetas iniciales
-enlaces.forEach((link, i) => {
-  const card = crearTarjetaEnlace(link, i);
-  linksContainer.appendChild(card);
+/* Inicializa el modal de Bootstrap */
+window.addEventListener("DOMContentLoaded", () => {
+  const modalEl = document.getElementById("modalEdicion");
+  if (modalEl) {
+    modalEdicion = new bootstrap.Modal(modalEl);
+  }
+  cargarNodos();
 });
 
-// Poblar select
-poblarSelect(selectEnlace, enlaces);
+/* === EVENTO: Modo oscuro (click) === */
+document.getElementById("btnTema").addEventListener("click", () => {
+  modoOscuro = !modoOscuro;
+  aplicarTema(modoOscuro);
+  document.getElementById("btnTema").textContent = modoOscuro ? "☀️ Claro" : "🌙 Oscuro";
+});
 
-// Modificar href al hacer clic
-document.getElementById('btnModificar').addEventListener('click', () => {
-  const selectedId = selectEnlace.value;
-  const nuevoHref  = inputHref.value.trim();
+/* === EVENTO: Crear nodo (click) === */
+document.getElementById("btnCrearNodo").addEventListener("click", async () => {
+  const etiqueta = document.getElementById("inputEtiqueta").value.trim();
+  const href = document.getElementById("inputHref").value.trim();
 
-  if (!nuevoHref) {
-    inputHref.style.borderColor = '#c0392b';
-    inputHref.placeholder = '⚠️ Ingresá una URL válida';
-    setTimeout(() => {
-      inputHref.style.borderColor = '';
-      inputHref.placeholder = 'https://nuevo-sitio.com';
-    }, 1800);
+  if (!etiqueta || !href) {
+    mostrarMensajeCrear("Completá la etiqueta y la URL.", "danger");
     return;
   }
 
-  // Buscar el enlace en el array
-  const link = enlaces.find(l => l.id === selectedId);
-  const valorAnterior = link.href;
+  /* Genera ID único con timestamp */
+  const nuevoId = `nodo-${Date.now()}`;
 
-  // Actualizar el dato
-  link.href = nuevoHref;
+  try {
+    const resp = await fetch("/api/nodos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: nuevoId, etiqueta, href }),
+    });
+    const datos = await resp.json();
 
-  // Actualizar la tarjeta visual
-  const card = linksContainer.querySelector(`[data-id="${selectedId}"]`);
-  actualizarTarjeta(card, nuevoHref);
-
-  // Agregar al log
-  const emptyMsg = logContainer.querySelector('.empty-msg');
-  if (emptyMsg) emptyMsg.remove();
-
-  const entrada = crearEntradaLog(link.nombre, valorAnterior, nuevoHref);
-  logContainer.prepend(entrada);
-
-  // Limpiar input
-  inputHref.value = '';
+    if (datos.ok) {
+      mostrarMensajeCrear(`Enlace "${etiqueta}" creado.`, "success");
+      registrarCambio(`CREAR → etiqueta: "${etiqueta}" | href: "${href}"`, "success");
+      document.getElementById("inputEtiqueta").value = "";
+      document.getElementById("inputHref").value = "";
+      await cargarNodos();
+    }
+  } catch (err) {
+    mostrarMensajeCrear("Error al crear el nodo.", "danger");
+  }
 });
 
-// Limpiar log
-document.getElementById('btnLimpiarLog').addEventListener('click', () => {
-  logContainer.innerHTML = '<span class="empty-msg">Aún no hay cambios registrados...</span>';
+/* === EVENTO: Guardar edición (click en modal) === */
+document.getElementById("btnGuardarEdicion").addEventListener("click", async () => {
+  const id = document.getElementById("editId").value;
+  const etiqueta = document.getElementById("editEtiqueta").value.trim();
+  const href = document.getElementById("editHref").value.trim();
+
+  if (!etiqueta || !href) return;
+
+  try {
+    const resp = await fetch(`/api/nodos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ etiqueta, href }),
+    });
+    const datos = await resp.json();
+
+    if (datos.ok) {
+      registrarCambio(`EDITAR → id: "${id}" | nueva etiqueta: "${etiqueta}" | nuevo href: "${href}"`, "warning");
+      modalEdicion.hide();
+      await cargarNodos();
+    }
+  } catch (err) {
+    console.error("Error al editar:", err);
+  }
 });
+
+/**
+ * Carga los nodos del servidor y los renderiza.
+ */
+async function cargarNodos() {
+  try {
+    const resp = await fetch("/api/nodos");
+    const nodos = await resp.json();
+    renderizarNodos(nodos, abrirModalEdicion, eliminarNodo);
+  } catch (err) {
+    console.error("Error al cargar nodos:", err);
+  }
+}
+
+/**
+ * Abre el modal precargado con los datos del nodo a editar.
+ * @param {{ id: string, etiqueta: string, href: string }} nodo
+ */
+function abrirModalEdicion(nodo) {
+  document.getElementById("editId").value = nodo.id;
+  document.getElementById("editEtiqueta").value = nodo.etiqueta;
+  document.getElementById("editHref").value = nodo.href;
+
+  registrarCambio(`EDITAR (abrió modal) → id: "${nodo.id}"`, "info");
+  modalEdicion.show();
+}
+
+/**
+ * Elimina un nodo por su ID.
+ * Actualiza archivo .txt y DOM.
+ * @param {string} id
+ */
+async function eliminarNodo(id) {
+  try {
+    const resp = await fetch(`/api/nodos/${id}`, { method: "DELETE" });
+    const datos = await resp.json();
+
+    if (datos.ok) {
+      registrarCambio(`ELIMINAR → id: "${id}"`, "danger");
+      await cargarNodos();
+    }
+  } catch (err) {
+    console.error("Error al eliminar:", err);
+  }
+}

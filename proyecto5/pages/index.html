@@ -1,66 +1,83 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="claro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto 5 — innerHTML Dinámico</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/style/styles.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyecto 5 - innerHTML dinámico</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../style/estilos.css"/>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row min-vh-100">
 
-      <!-- Panel izquierdo: controles -->
-      <aside class="controls-panel col-12 col-lg-4 col-xl-3 p-3 bg-light overflow-auto" style="max-height: 100vh;">
-        <div class="brand">innerHTML</div>
-        <p class="brand-sub">Inserción dinámica de HTML</p>
-
-        <div class="ctrl-group mb-3">
-          <div class="ctrl-title">📝 Párrafo</div>
-          <input type="text" id="inputParrafo" class="ctrl-input form-control mb-2" placeholder="Texto del párrafo..." />
-          <button id="btnParrafo" class="ctrl-btn btn-p btn btn-primary w-100">Agregar párrafo</button>
-        </div>
-
-        <div class="ctrl-group mb-3">
-          <div class="ctrl-title">🖼️ Imagen</div>
-          <input type="text" id="inputImgUrl" class="ctrl-input form-control mb-2" placeholder="URL de imagen (opcional)" />
-          <input type="text" id="inputImgAlt" class="ctrl-input form-control mb-2" placeholder="Texto alternativo..." />
-          <button id="btnImagen" class="ctrl-btn btn-img btn btn-success w-100">Agregar imagen</button>
-        </div>
-
-        <div class="ctrl-group mb-3">
-          <div class="ctrl-title">📋 Lista</div>
-          <input type="text" id="inputListaTitulo" class="ctrl-input form-control mb-2" placeholder="Título de la lista..." />
-          <textarea id="inputListaItems" class="ctrl-textarea form-control mb-2" placeholder="Ítem 1&#10;Ítem 2&#10;Ítem 3" rows="4"></textarea>
-          <div class="ctrl-radio-group mb-2">
-            <label class="ctrl-radio me-3"><input type="radio" name="tipoLista" value="ul" checked /> Desordenada</label>
-            <label class="ctrl-radio"><input type="radio" name="tipoLista" value="ol" /> Numerada</label>
-          </div>
-          <button id="btnLista" class="ctrl-btn btn-l btn btn-warning w-100">Agregar lista</button>
-        </div>
-
-        <button id="btnLimpiar" class="ctrl-btn btn-clear btn btn-danger w-100 mt-3">🗑️ Limpiar todo</button>
-      </aside>
-
-      <!-- Panel derecho: canvas -->
-      <main class="canvas-panel col-12 col-lg-8 col-xl-9 p-3 d-flex flex-column">
-        <div class="canvas-header d-flex justify-content-between align-items-center mb-3">
-          <span class="canvas-label">Área de renderizado</span>
-          <span id="contador-badge" class="count-badge badge bg-secondary">0 elementos</span>
-        </div>
-        <div id="canvas" class="canvas-body flex-grow-1 border rounded p-3 overflow-auto">
-          <div class="canvas-empty text-center text-muted">
-            <span class="empty-icon d-block fs-3">✦</span>
-            <p>El contenido aparecerá aquí</p>
-          </div>
-        </div>
-      </main>
-
+  <nav class="navbar navbar-dark bg-info">
+    <div class="container">
+      <span class="navbar-brand fw-bold">Proyecto 5 - innerHTML</span>
+      <button id="btnTema" class="btn btn-outline-light btn-sm">🌙 Oscuro</button>
     </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2 class="mb-4">Inserción Dinámica con innerHTML</h2>
+
+    <!-- Selector de tipo de elemento -->
+    <div class="card p-4 mb-4 zona-card">
+      <h5 class="mb-3">➕ Agregar elemento HTML</h5>
+
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-4">
+          <label for="tipoElemento" class="form-label">Tipo de elemento:</label>
+          <select id="tipoElemento" class="form-select">
+            <option value="parrafo">Párrafo</option>
+            <option value="titulo">Título (H2)</option>
+            <option value="lista">Lista desordenada</option>
+            <option value="tabla">Tabla simple</option>
+            <option value="alerta">Alerta Bootstrap</option>
+            <option value="imagen">Imagen aleatoria</option>
+            <option value="tarjeta">Tarjeta Bootstrap</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="inputContenido" class="form-label">Contenido (opcional):</label>
+          <input type="text" id="inputContenido" class="form-control"
+            placeholder="Texto personalizado..."/>
+        </div>
+        <div class="col-12 col-md-2 d-flex align-items-end">
+          <button id="btnAgregarElemento" class="btn btn-info text-white w-100">
+            Agregar
+          </button>
+        </div>
+      </div>
+
+      <div id="mensajeAgregar" class="d-none alert"></div>
+    </div>
+
+    <!-- Panel con estadísticas -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="zona-stat text-center p-3 rounded">
+          <div class="fs-2 fw-bold text-info" id="statTotal">0</div>
+          <small>Total elementos</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="zona-stat text-center p-3 rounded">
+          <div class="fs-2 fw-bold text-success" id="statUltimo">—</div>
+          <small>Último agregado</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zona de visualización dinámica -->
+    <h5 class="mb-3">Elementos agregados (<span id="contadorElementos">0</span>):</h5>
+    <div id="zonaElementos" class="zona-elementos p-3 rounded mb-4"></div>
+
+    <!-- Botón para limpiar todo -->
+    <button id="btnLimpiarTodo" class="btn btn-outline-danger mb-4">
+      🗑️ Limpiar todos los elementos
+    </button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="/modules/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../modules/main.js"></script>
 </body>
 </html>

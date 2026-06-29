@@ -1,20 +1,49 @@
-// dom.js — funciones reutilizables para el proyecto 2
+/**
+ * Utilidades reutilizables del DOM.
+ * Compartidas entre páginas del proyecto.
+ */
 
-export function mostrarSeccion(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById(`section-${id}`).classList.add('active');
-  document.querySelector(`[data-section="${id}"]`).classList.add('active');
+/**
+ * Agrega ítem a lista de registro de eventos.
+ * @param {string} listaId - ID del ul
+ * @param {string} texto
+ * @param {string} tipo - color Bootstrap
+ */
+export function registrarEvento(listaId, texto, tipo = "secondary") {
+  const lista = document.getElementById(listaId);
+  if (!lista) return;
+
+  const ahora = new Date().toLocaleTimeString("es-AR");
+  const item = document.createElement("li");
+  item.className = `list-group-item list-group-item-${tipo} elemento-nuevo`;
+  item.textContent = `[${ahora}] ${texto}`;
+
+  /* Inserta al inicio para mostrar el más reciente primero */
+  lista.insertBefore(item, lista.firstChild);
 }
 
-export function agregarLogItem(contenedor, texto) {
-  const p = document.createElement('p');
-  p.textContent = `→ ${texto}`;
-  p.style.margin = '2px 0';
-  contenedor.prepend(p);
+/**
+ * Aplica tema claro u oscuro al documento.
+ * @param {boolean} oscuro
+ */
+export function aplicarTema(oscuro) {
+  document.documentElement.setAttribute("data-tema", oscuro ? "oscuro" : "claro");
 }
 
-export function coloraleatorio() {
-  const colores = ['#e63946','#4cc9f0','#2ec4b6','#ff9f1c','#a78bfa','#22c55e','#f72585'];
-  return colores[Math.floor(Math.random() * colores.length)];
+/**
+ * Configura el botón de cambio de tema.
+ * @param {boolean} modoOscuro - estado inicial
+ * @returns {boolean} - nuevo estado
+ */
+export function configurarBtnTema(modoOscuro) {
+  const btn = document.getElementById("btnTema");
+  if (!btn) return modoOscuro;
+
+  btn.addEventListener("click", () => {
+    modoOscuro = !modoOscuro;
+    aplicarTema(modoOscuro);
+    btn.textContent = modoOscuro ? "☀️ Claro" : "🌙 Oscuro";
+  });
+
+  return modoOscuro;
 }

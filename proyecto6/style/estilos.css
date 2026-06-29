@@ -1,0 +1,102 @@
+[data-tema="claro"] {
+  --fondo-body: #fff5f5;
+  --fondo-zona: #ffffff;
+  --color-texto: #212529;
+  --borde: #dee2e6;
+}
+
+[data-tema="oscuro"] {
+  --fondo-body: #121212;
+  --fondo-zona: #1e1e1e;
+  --color-texto: #e0e0e0;
+  --borde: #444444;
+}
+
+body {
+  background-color: var(--fondo-body);
+  color: var(--color-texto);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Formulario y cards */
+.zona-form {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  transition: background-color 0.3s;
+}
+
+/* Mensajes de error por campo */
+.error-campo {
+  color: #dc3545;
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+/* Contenedor de tarjetas de registros */
+.contenedor-registros {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Tarjeta de persona registrada */
+.tarjeta-registro {
+  background-color: var(--fondo-zona);
+  border: 1px solid var(--borde);
+  border-left: 4px solid #dc3545;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s;
+}
+
+.tarjeta-registro .nombre-registro {
+  font-weight: bold;
+  font-size: 1.05rem;
+  color: #dc3545;
+}
+
+.tarjeta-registro .dato-registro {
+  font-size: 0.88rem;
+  color: var(--color-texto);
+  opacity: 0.85;
+}
+
+.tarjeta-registro .intereses-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.tarjeta-registro .badge-interes {
+  font-size: 0.75rem;
+  background-color: #dc3545;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.elemento-nuevo {
+  animation: aparecer 0.35s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Input con error */
+.input-invalido {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 3px rgba(220,53,69,0.2) !important;
+}
+
+@media (max-width: 576px) {
+  .contenedor-registros {
+    max-height: 50vh;
+  }
+}

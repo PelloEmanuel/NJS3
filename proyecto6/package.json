@@ -1,9 +1,8 @@
 {
-  "name": "proyecto6-formulario",
+  "name": "proyecto6",
   "version": "1.0.0",
-  "description": "Formulario de registro con visualización de datos",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },

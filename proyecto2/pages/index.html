@@ -1,160 +1,118 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="claro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proyecto 2 — Eventos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/style/styles.css" />
-  <style>
-    .sidebar {
-      min-height: 100vh;
-      background: #212529;
-      color: #fff;
-    }
-    .sidebar .nav-item {
-      cursor: pointer;
-      padding: 10px;
-    }
-    .sidebar .nav-item.active {
-      background: #343a40;
-    }
-    .sidebar-title {
-      font-size: 1.5rem;
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 1px solid #444;
-    }
-    .main-content {
-      padding: 20px;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
-    }
-    .hover-card {
-      padding: 20px;
-      text-align: center;
-      background: #f8f9fa;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .dbl-box {
-      padding: 40px;
-      text-align: center;
-      background: #dee2e6;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .key-capture-area {
-      padding: 30px;
-      background: #e9ecef;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyecto 2 - Eventos DHTML</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../style/estilos.css"/>
 </head>
 <body>
 
-  <!-- Botón para abrir sidebar en mobile -->
-  <nav class="navbar bg-dark d-md-none">
-    <div class="container-fluid">
-      <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
-        ☰ Menú
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <span class="navbar-brand fw-bold">Proyecto 2 - Eventos</span>
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/eventos-click">Click</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/eventos-teclado">Teclado</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/eventos-foco">Foco</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/eventos-raton">Ratón</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/eventos-formulario">Formulario</a>
+          </li>
+        </ul>
+      </div>
+      <button id="btnTema" class="btn btn-outline-light btn-sm ms-3">
+        🌙 Oscuro
       </button>
     </div>
   </nav>
 
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Tipos de Eventos DHTML</h1>
+    <p class="text-center texto-secundario mb-5">
+      Seleccioná una sección del menú para explorar cada tipo de evento.
+    </p>
 
-      <!-- Sidebar escritorio -->
-      <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar p-0">
-        <div class="sidebar-title">Eventos JS</div>
-        <ul class="nav flex-column nav-list">
-          <li class="nav-item active" data-section="click">🖱️ Click</li>
-          <li class="nav-item" data-section="mouseover">✨ Mouseover</li>
-          <li class="nav-item" data-section="input">⌨️ Input</li>
-          <li class="nav-item" data-section="keydown">🔑 Keydown</li>
-          <li class="nav-item" data-section="dblclick">⚡ Dblclick</li>
-        </ul>
-      </nav>
+    <div class="row g-4 justify-content-center">
 
-      <!-- Sidebar mobile (offcanvas) -->
-      <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebarMenu">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title">Eventos JS</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="nav flex-column nav-list">
-            <li class="nav-item active" data-section="click" data-bs-dismiss="offcanvas">🖱️ Click</li>
-            <li class="nav-item" data-section="mouseover" data-bs-dismiss="offcanvas">✨ Mouseover</li>
-            <li class="nav-item" data-section="input" data-bs-dismiss="offcanvas">⌨️ Input</li>
-            <li class="nav-item" data-section="keydown" data-bs-dismiss="offcanvas">🔑 Keydown</li>
-            <li class="nav-item" data-section="dblclick" data-bs-dismiss="offcanvas">⚡ Dblclick</li>
-          </ul>
-        </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <a href="/eventos-click" class="text-decoration-none">
+          <div class="card tarjeta-evento h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icono-evento mb-3">🖱️</div>
+              <h5 class="card-title">Eventos Click</h5>
+              <p class="card-text">Interacciones con clic del mouse.</p>
+            </div>
+          </div>
+        </a>
       </div>
 
-      <!-- Main Content -->
-      <main class="col-12 col-md-9 col-lg-10 main-content">
-
-        <!-- Sección Click -->
-        <section id="section-click" class="section active">
-          <h2 class="section-heading">Evento: <span class="tag">click</span></h2>
-          <p class="section-desc">Cada vez que hagas clic en el botón, se agrega un nuevo elemento a la lista.</p>
-          <button id="btnClick" class="btn btn-primary">Hacer clic aquí</button>
-          <div id="click-output" class="output-box mt-3"></div>
-        </section>
-
-        <!-- Sección Mouseover -->
-        <section id="section-mouseover" class="section">
-          <h2 class="section-heading">Evento: <span class="tag">mouseover</span></h2>
-          <p class="section-desc">Pasa el mouse sobre cada tarjeta para ver el efecto.</p>
-          <div id="cards-container" class="cards-grid">
-            <div class="hover-card" data-color="#e63946">🔴 Rojo</div>
-            <div class="hover-card" data-color="#4cc9f0">🔵 Azul</div>
-            <div class="hover-card" data-color="#2ec4b6">🟢 Verde</div>
-            <div class="hover-card" data-color="#ff9f1c">🟡 Amarillo</div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <a href="/eventos-teclado" class="text-decoration-none">
+          <div class="card tarjeta-evento h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icono-evento mb-3">⌨️</div>
+              <h5 class="card-title">Eventos Teclado</h5>
+              <p class="card-text">Captura de teclas presionadas.</p>
+            </div>
           </div>
-          <p id="hover-msg" class="hint-msg mt-3"></p>
-        </section>
+        </a>
+      </div>
 
-        <!-- Sección Input -->
-        <section id="section-input" class="section">
-          <h2 class="section-heading">Evento: <span class="tag">input</span></h2>
-          <p class="section-desc">Escribe en el campo y observa la respuesta en tiempo real.</p>
-          <input type="text" id="inputTexto" class="form-control" placeholder="Escribe algo..." />
-          <div id="input-output" class="output-box mt-3">
-            <span class="muted">Esperando entrada...</span>
+      <div class="col-12 col-md-6 col-lg-4">
+        <a href="/eventos-foco" class="text-decoration-none">
+          <div class="card tarjeta-evento h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icono-evento mb-3">🎯</div>
+              <h5 class="card-title">Eventos Foco</h5>
+              <p class="card-text">Focus y blur en campos.</p>
+            </div>
           </div>
-        </section>
+        </a>
+      </div>
 
-        <!-- Sección Keydown -->
-        <section id="section-keydown" class="section">
-          <h2 class="section-heading">Evento: <span class="tag">keydown</span></h2>
-          <p class="section-desc">Haz clic en el área y presiona cualquier tecla.</p>
-          <div id="key-area" class="key-capture-area" tabindex="0">Haz clic aquí y presiona una tecla</div>
-          <div id="key-output" class="output-box mt-3">
-            <span class="muted">Sin tecla aún...</span>
+      <div class="col-12 col-md-6 col-lg-4">
+        <a href="/eventos-raton" class="text-decoration-none">
+          <div class="card tarjeta-evento h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icono-evento mb-3">🔵</div>
+              <h5 class="card-title">Eventos Ratón</h5>
+              <p class="card-text">Movimiento y posición del cursor.</p>
+            </div>
           </div>
-        </section>
+        </a>
+      </div>
 
-        <!-- Sección Dblclick -->
-        <section id="section-dblclick" class="section">
-          <h2 class="section-heading">Evento: <span class="tag">dblclick</span></h2>
-          <p class="section-desc">Haz doble clic en el recuadro para cambiar su color.</p>
-          <div id="dbl-box" class="dbl-box">Doble clic aquí</div>
-          <p id="dbl-msg" class="hint-msg mt-3"></p>
-        </section>
+      <div class="col-12 col-md-6 col-lg-4">
+        <a href="/eventos-formulario" class="text-decoration-none">
+          <div class="card tarjeta-evento h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icono-evento mb-3">📋</div>
+              <h5 class="card-title">Eventos Formulario</h5>
+              <p class="card-text">Submit, change e input.</p>
+            </div>
+          </div>
+        </a>
+      </div>
 
-      </main>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="/modules/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../modules/main.js"></script>
 </body>
 </html>

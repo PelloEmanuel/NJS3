@@ -1,0 +1,86 @@
+[data-tema="claro"] {
+  --fondo-body: #fffdf0;
+  --fondo-zona: #ffffff;
+  --color-texto: #212529;
+  --borde: #dee2e6;
+}
+
+[data-tema="oscuro"] {
+  --fondo-body: #121212;
+  --fondo-zona: #1e1e1e;
+  --color-texto: #e0e0e0;
+  --borde: #444444;
+}
+
+body {
+  background-color: var(--fondo-body);
+  color: var(--color-texto);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.zona-form {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Tarjeta de nodo <a> */
+.tarjeta-nodo {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.tarjeta-nodo:hover {
+  box-shadow: 0 4px 16px rgba(255,193,7,0.3);
+}
+
+.enlace-nodo {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.enlace-nodo:hover {
+  text-decoration: underline;
+}
+
+/* Etiqueta de atributo */
+.etiqueta-atributo {
+  font-size: 0.78rem;
+  color: #888;
+  font-family: monospace;
+}
+
+/* Registro de cambios */
+.lista-registro {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.lista-registro .list-group-item {
+  background-color: var(--fondo-zona);
+  color: var(--color-texto);
+  border-color: var(--borde);
+  font-size: 0.83rem;
+}
+
+.elemento-nuevo {
+  animation: aparecer 0.35s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 576px) {
+  .tarjeta-nodo { padding: 10px; }
+}
