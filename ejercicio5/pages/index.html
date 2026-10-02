@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 5 - Agregar objetos con innerHTML</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="menu">
+      <div class="marca"><strong>Práctica DOM</strong><span>Ejercicio 5</span></div>
+      <p class="menu-titulo">Agregar contenido</p>
+      <div class="botones">
+        <button class="btn-agregar" data-tipo="titulo">Agregar título</button>
+        <button class="btn-agregar" data-tipo="parrafo">Agregar párrafo</button>
+        <button class="btn-agregar" data-tipo="lista">Agregar lista</button>
+        <button class="btn-agregar" data-tipo="tabla">Agregar tabla</button>
+        <button class="btn-agregar" data-tipo="tarjeta">Agregar tarjeta con imagen</button>
+        <button class="btn-agregar" data-tipo="boton">Agregar botón</button>
+        <button id="btnLimpiar" class="accion">Limpiar todo</button>
+      </div>
+      <button id="btnTema" class="tema">Modo oscuro</button>
+    </aside>
+    <main class="contenido">
+      <h2 class="titulo-pagina">Agregar objetos con innerHTML</h2>
+      <section id="editor" class="panel oculto"></section>
+      <div id="zona" class="panel zona"><p class="vacio">Todavía no agregaste contenido. Elegí una opción del menú.</p></div>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/modules/script.js"></script>
+</body>
+</html>

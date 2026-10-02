@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 3 - Contar hijos</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="menu">
+      <div class="marca"><strong>Práctica DOM</strong><span>Ejercicio 3</span></div>
+
+      <p class="menu-titulo">Menú de componentes</p>
+      <nav class="botones">
+        <button class="btn-nav activo" data-seccion="c1">Datos de texto</button>
+        <button class="btn-nav" data-seccion="c2">Galería de fotos</button>
+        <button class="btn-nav" data-seccion="c3">Formulario</button>
+        <button class="btn-nav" data-seccion="c4">Lista de ítems</button>
+        <button class="btn-nav" data-seccion="c5">Multimedia</button>
+      </nav>
+
+      <p class="menu-titulo">Inspector</p>
+      <button id="btnHijos" class="accion">Contar elementos hijos</button>
+
+      <button id="btnTema" class="tema">Modo oscuro</button>
+    </aside>
+
+    <main class="contenido">
+      <h2 class="titulo-pagina">Contar hijos de un componente</h2>
+
+      <div id="resultado-conteo" class="panel resultado">
+        <span class="vacio-conteo">Presioná «Contar elementos hijos» para ver cuántos elementos tiene el componente actual.</span>
+      </div>
+
+      <div id="contenedor-padre" class="panel">
+        <section id="c1" class="seccion-content" data-nombre="Datos de texto">
+          <h3>Sección informativa</h3>
+          <p class="lead">Bienvenido al sistema de inspección.</p>
+          <div class="alerta" data-nombre="Aviso">Esto es un contenedor hijo.</div>
+          <p>Agregá o quitá párrafos y mirá cómo cambia el conteo.</p>
+          <div class="acciones" data-nombre="Botones de acción">
+            <button id="btnAgregarParrafo">Agregar párrafo</button>
+            <button id="btnQuitarParrafo" class="secundario">Quitar último párrafo</button>
+          </div>
+        </section>
+
+        <section id="c2" class="seccion-content galeria oculto" data-nombre="Galería de fotos">
+          <h3>Galería visual</h3>
+          <figure class="foto" data-nombre="Foto"><img src="https://picsum.photos/id/10/300/200" alt="Foto 1"></figure>
+          <figure class="foto" data-nombre="Foto"><img src="https://picsum.photos/id/20/300/200" alt="Foto 2"></figure>
+          <figure class="foto" data-nombre="Foto"><img src="https://picsum.photos/id/30/300/200" alt="Foto 3"></figure>
+          <div class="acciones" data-nombre="Botones de acción">
+            <button id="btnAgregarFoto">Agregar foto</button>
+            <button id="btnQuitarFoto" class="secundario">Quitar última foto</button>
+          </div>
+        </section>
+
+        <section id="c3" class="seccion-content oculto" data-nombre="Formulario">
+          <h3>Acceso seguro</h3>
+          <div class="campo" data-nombre="Campo de usuario">
+            <label for="inputUsuario">Usuario</label>
+            <input type="text" id="inputUsuario" placeholder="Mínimo 3 caracteres">
+          </div>
+          <div class="campo" data-nombre="Campo de clave">
+            <label for="inputClave">Clave</label>
+            <input type="password" id="inputClave" placeholder="Mínimo 4 caracteres">
+          </div>
+          <div class="acciones" data-nombre="Botones de acción">
+            <button id="btnIngresar">Ingresar</button>
+            <button id="btnAgregarCampo" class="secundario">Agregar campo</button>
+            <button id="btnQuitarCampo" class="secundario">Quitar campo</button>
+          </div>
+        </section>
+
+        <section id="c4" class="seccion-content oculto" data-nombre="Lista de ítems">
+          <h3>Lista de objetos</h3>
+          <div class="item" data-nombre="Ítem">Ítem nodo A</div>
+          <div class="item" data-nombre="Ítem">Ítem nodo B</div>
+          <div class="acciones" data-nombre="Botones de acción">
+            <input type="text" id="textoItem" placeholder="Nombre del nuevo ítem">
+            <button id="btnAgregarItem">Agregar ítem</button>
+            <button id="btnQuitarItem" class="secundario">Quitar último ítem</button>
+          </div>
+          <p class="suave">Tip: hacé doble clic sobre un ítem para eliminarlo.</p>
+        </section>
+
+        <section id="c5" class="seccion-content oculto" data-nombre="Multimedia">
+          <h3>Video player</h3>
+          <div class="video" data-nombre="Video">
+            <iframe src="https://www.youtube.com/embed/FHrUrVgbmW8" title="Video" allowfullscreen></iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/modules/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 2 - Navegación y eventos</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="menu">
+      <div class="marca"><strong>Práctica DOM</strong><span>Ejercicio 2</span></div>
+      <p class="menu-titulo">Componentes</p>
+      <nav class="botones">
+        <button class="btn-nav activo" data-seccion="comp1">1. Contador (click)</button>
+        <button class="btn-nav" data-seccion="comp2">2. Caja (mouseover)</button>
+        <button class="btn-nav" data-seccion="comp3">3. Espejo (keyup)</button>
+        <button class="btn-nav" data-seccion="comp4">4. Selector (change)</button>
+        <button class="btn-nav" data-seccion="comp5">5. Texto (dblclick)</button>
+      </nav>
+      <button id="btnTema" class="tema">Modo oscuro</button>
+    </aside>
+    <main class="contenido">
+      <h2 class="titulo-pagina">Navegación y eventos</h2>
+      <div id="contenedor" class="panel">
+        <section id="comp1" class="seccion">
+          <h3>Contador</h3>
+          <div class="acciones">
+            <button id="btnContar">Sumar 1</button>
+            <button id="btnReset" class="secundario">Resetear contador</button>
+          </div>
+          <p>Veces pulsado: <strong id="contador">0</strong></p>
+        </section>
+
+        <section id="comp2" class="seccion oculto">
+          <h3>Pasá el mouse por la caja</h3>
+          <div id="caja" class="caja">Mouse fuera</div>
+        </section>
+
+        <section id="comp3" class="seccion oculto">
+          <h3>Escribí algo</h3>
+          <input type="text" id="entradaTexto" placeholder="Escribí acá">
+          <p>Dijiste: <strong id="salidaTexto"></strong></p>
+        </section>
+
+        <section id="comp4" class="seccion oculto">
+          <h3>Elegí un color de fondo</h3>
+          <select id="selectorColor">
+            <option value="#ecf0f1">Gris</option>
+            <option value="#f9c6c6">Rojo</option>
+            <option value="#c6f9d0">Verde</option>
+            <option value="#c6d8f9">Azul</option>
+          </select>
+          <div id="cajaColor" class="caja" style="margin-top: 1rem;">Esta caja cambia de color</div>
+        </section>
+
+        <section id="comp5" class="seccion oculto">
+          <h3>Hacé doble click en el texto</h3>
+          <p id="textoGrande">Doble click para agrandar o achicar</p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/modules/script.js"></script>
+</body>
+</html>

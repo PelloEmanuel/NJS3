@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 4 - Nodos &lt;a&gt; y atributos</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="menu">
+      <div class="marca"><strong>Práctica DOM</strong><span>Ejercicio 4</span></div>
+      <p class="menu-titulo">Crear enlaces</p>
+      <div class="botones">
+        <button class="btn-crear" data-indice="0">Crear Google</button>
+        <button class="btn-crear" data-indice="1">Crear YouTube</button>
+        <button class="btn-crear" data-indice="2">Crear Wikipedia</button>
+        <button class="btn-crear" data-indice="3">Crear GitHub</button>
+        <button class="btn-crear" data-indice="4">Crear MDN</button>
+      </div>
+      <p class="menu-titulo">Modificar</p>
+      <div class="botones">
+        <button id="btnEditar" class="accion">Editar URL</button>
+        <button id="btnTarget">Alternar target</button>
+      </div>
+      <button id="btnTema" class="tema">Modo oscuro</button>
+    </aside>
+    <main class="contenido">
+      <h2 class="titulo-pagina">Nodos &lt;a&gt; y atributos</h2>
+      <div id="zona" class="panel zona-enlaces"><p class="vacio">Todavía no creaste ningún enlace.</p></div>
+
+      <section id="editor" class="panel oculto">
+        <h3>Editar enlace</h3>
+        <label for="selectEnlace">¿Qué enlace querés modificar?</label>
+        <select id="selectEnlace"></select>
+        <label for="inputTitulo">Título (texto que aparece en el botón)</label>
+        <input type="text" id="inputTitulo">
+        <label for="inputUrl">URL de destino</label>
+        <input type="text" id="inputUrl" placeholder="https://www.ejemplo.com">
+        <p id="errorEditor" class="error"></p>
+        <div class="acciones">
+          <button id="btnGuardar">Guardar cambios</button>
+          <button id="btnCancelar" class="secundario">Cancelar</button>
+        </div>
+      </section>
+
+      <h3>Registro de cambios</h3>
+      <ul id="registro" class="panel registro"><li class="suave">Acá vas a ver cada atributo modificado.</li></ul>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/modules/script.js"></script>
+</body>
+</html>

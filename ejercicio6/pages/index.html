@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 6 - Formulario de registro</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <header class="barra-superior">
+    <h2>Ejercicio 6 · Formulario de registro</h2>
+    <button id="btnTema" class="tema">Modo oscuro</button>
+  </header>
+
+  <div class="dos-columnas">
+    <form id="formulario" class="panel" novalidate>
+      <h3>Datos personales</h3>
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Ej: Ana Pérez">
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="ana@correo.com">
+
+      <label for="edad">Edad (mínimo 10 años)</label>
+      <input type="number" id="edad" min="10" max="120">
+
+      <fieldset>
+        <legend>Género</legend>
+        <label><input type="radio" name="genero" value="Femenino"> Femenino</label>
+        <label><input type="radio" name="genero" value="Masculino"> Masculino</label>
+        <label><input type="radio" name="genero" value="Otro"> Otro</label>
+      </fieldset>
+
+      <label for="pais">País o región</label>
+      <select id="pais">
+        <option value="">-- Elegí una opción --</option>
+        <option value="Argentina">Argentina</option>
+        <option value="Chile">Chile</option>
+        <option value="Uruguay">Uruguay</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <div id="campoOtroPais" class="oculto">
+        <label for="otroPais">Escribí tu país o región</label>
+        <input type="text" id="otroPais" placeholder="Ej: Paraguay">
+      </div>
+
+      <fieldset>
+        <legend>Intereses</legend>
+        <label><input type="checkbox" name="intereses" value="HTML"> HTML</label>
+        <label><input type="checkbox" name="intereses" value="CSS"> CSS</label>
+        <label><input type="checkbox" name="intereses" value="JavaScript"> JavaScript</label>
+      </fieldset>
+
+      <label><input type="checkbox" id="terminos"> Acepto los términos y condiciones</label>
+
+      <p id="mensajeForm" class="error"></p>
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <section>
+      <h3>Personas registradas</h3>
+      <div id="resultado" class="panel"><p class="vacio">Todavía no hay registros.</p></div>
+    </section>
+  </div>
+
+  <script src="/modules/script.js"></script>
+</body>
+</html>

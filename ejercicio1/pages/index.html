@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 1 - Crear y modificar elementos</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="menu">
+      <div class="marca"><strong>Práctica DOM</strong><span>Ejercicio 1</span></div>
+      <p class="menu-titulo">Título H1</p>
+      <div class="botones">
+        <button id="btnAgregarH1">Agregar H1</button>
+        <button id="btnTextoH1">Cambiar texto del H1</button>
+        <button id="btnColorH1">Cambiar color del H1</button>
+      </div>
+      <p class="menu-titulo">Imagen</p>
+      <div class="botones">
+        <button id="btnAgregarImg">Agregar imagen</button>
+        <button id="btnCambiarImg">Cambiar imagen</button>
+        <label for="inputAncho">Ancho (px)</label>
+        <input type="number" id="inputAncho" min="20" max="2000" placeholder="Ej: 300">
+        <label for="inputAlto">Alto (px, opcional)</label>
+        <input type="number" id="inputAlto" min="20" max="2000" placeholder="Automático">
+        <button id="btnTamanioImg" class="accion">Aplicar tamaño</button>
+      </div>
+      <button id="btnTema" class="tema">Modo oscuro</button>
+    </aside>
+    <main class="contenido">
+      <h2 class="titulo-pagina">Crear y modificar elementos</h2>
+      <div id="mensaje" class="aviso">Usá el menú de la izquierda para agregar y modificar elementos.</div>
+      <div id="zona" class="panel zona"></div>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/modules/script.js"></script>
+</body>
+</html>
